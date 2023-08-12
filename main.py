@@ -1,61 +1,33 @@
-from tkinter import *
-from math import sqrt
-import sys
+import tkinter as tk
 
 
-## First grade equation##
+def ecuacionprimergrado():
+    try:
+        if num1 !=0:
+           x= float(-num2.get())/float(num1.get())
+    except Exception as ex:
+        print(ex)
+        x='error'
+    num3.set(x)
 
-def ecuacionPrimerGrado():
-    a = float(input('Introduzca el valor de A :'))
-    b = float(input('Introduzca el valor de  B :'))
+
+
     
-    if a != 0 :
-        x= -b/a
-        return print('La solucion es  : x=%4.3f' % (x)) 
-       
-    if a == 0:
-        return print('La ecuacion no tiene solucion')
+root = tk.Tk()
 
+num1 = tk.StringVar()
+num2 = tk.StringVar()
+num3 = tk.StringVar()
 
-## Second grade equation##
-def ecuacionSegundoGrado():
-    a = float(input('Introduzca el valor de A :'))
-    b = float(input('Introduzca el valor de B :'))
-    c = float(input('introducue el valor de c :'))
-    x1 = (-b + sqrt(b**2 -4 *a*c)) / (2*a)
+tk.Label(root, text="Number 1:").grid(row=0, column=0)
+tk.Label(root, text="Number 2:").grid(row=1, column=0)
+tk.Label(root, text="Result:").grid(row=2, column=0)
 
-    x2 = (-b - sqrt(b**2 -4 *a*c)) / (2*a)
-    
-    return print('La solucion es : x1=%4.3f y x2=%4.3f ' % (x1,x2))
+tk.Entry(root, textvariable=num1).grid(row=0, column=1)
+tk.Entry(root, textvariable=num2).grid(row=1, column=1)
+tk.Entry(root, textvariable=num3).grid(row=2, column=1)
 
-## Numeros primos ##
-def es_Primo():
-    num=int(input('Introduzca un numero :'))
-    prime = True
-    divisor = 2
-    while divisor < num :
-        if num % divisor == 0:
-            prime = False
-        divisor +=1
-    if prime :
-        return print('El numero  ' ,num,' es primo ')
-    else:
-        return print('El numero ',num,'no es primo ')
+button = tk.Button(root, text="Calculate", command=ecuacionprimergrado)
+button.grid(row=3, column=1)
 
-
-def salir():
-    print('Saliendo')
-    sys.exit()
-
-
-## Creacion del menu ##
-root =  Tk()
-menubar = Menu(root)
-root.config(menu=menubar)
-root.mainloop
-filemenu =Menu(menubar,tearoff=0)
-
-menubar.add_cascade(label='Ecuaciones')
-
-if __name__ == '__main__':
-    menu_principal()
+root.mainloop()
